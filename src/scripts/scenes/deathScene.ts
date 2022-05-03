@@ -20,23 +20,19 @@ export default class DeathScene extends Phaser.Scene {
                 0,
                 this.cameras.main.width,
                 this.cameras.main.height,
-                0xffffff,
-                0.2
+                0x000000,
+                0.4
             )
-            .setOrigin(0)
-            .setDepth(10);
+            .setOrigin(0);
 
         this.add
             .text(800, 400, "Game Over!", config.textStyles.gameoverText)
-            .setOrigin(0.5)
-            .setDepth(10);
+            .setOrigin(0.5);
         this.add
             .text(800, 525, "Your Score:", config.textStyles.gameoverText)
-            .setOrigin(0.5)
-            .setDepth(10);
+            .setOrigin(0.5);
         this.add
             .text(800, 675, `${this.score}`, config.textStyles.gameoverScore)
-            .setOrigin(0.5)
-            .setDepth(10);
+            .setOrigin(0.5);
     }
 }

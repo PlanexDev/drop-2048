@@ -16,7 +16,7 @@ const config = {
         width: DEFAULT_WIDTH,
         height: DEFAULT_HEIGHT,
     },
-    scene: [PreloadScene, DeathScene, FreeplayScene],
+    scene: [PreloadScene, FreeplayScene, DeathScene],
     physics: {
         default: "arcade",
         arcade: {
