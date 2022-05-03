@@ -37,8 +37,8 @@ export default class FreeplayScene extends Phaser.Scene {
             const b2Level = (b2 as Block).level;
 
             if (b1Level === b2Level && !(b1 as Block).willMerge && !(b2 as Block).willMerge) {
-                (b1 as Block).glow();
-                (b2 as Block).glow()
+                (b1 as Block).glow(this.time);
+                (b2 as Block).glow(this.time)
                 this.time.addEvent({
                     delay: 500,
                     callback: () => {
@@ -114,8 +114,8 @@ export default class FreeplayScene extends Phaser.Scene {
                     b1.level === b2.level
                 ) {
                     if (!b1.willMerge && !b2.willMerge) {
-                        b1.glow();
-                        b2.glow()
+                        b1.glow(this.time);
+                        b2.glow(this.time)
                         this.time.addEvent({
                             delay: 500,
                             callback: () => {

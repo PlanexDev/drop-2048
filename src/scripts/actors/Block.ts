@@ -49,8 +49,14 @@ export default class Block extends Phaser.GameObjects.Container {
         this.willMerge = false;
     }
 
-    public glow() {
-        this.rectangle.fillColor = Phaser.Display.Color.IntegerToColor(this.rectangle.fillColor).brighten(15).color;
+    public glow(clock: Phaser.Time.Clock) {
+        clock.addEvent({
+            repeat: 150,
+            delay: 10,
+            callback: () => {
+                this.rectangle.fillColor = Phaser.Display.Color.IntegerToColor(this.rectangle.fillColor).brighten(1).color;
+            }
+        })
         this.willMerge = true;
     }
 
