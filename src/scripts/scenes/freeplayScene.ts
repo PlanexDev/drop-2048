@@ -36,14 +36,21 @@ export default class FreeplayScene extends Phaser.Scene {
             const b1Level = (b1 as Block).level;
             const b2Level = (b2 as Block).level;
 
-            if (b1Level === b2Level) {
-                (b1 as Block).upgradeLevel();
-                b2.destroy();
+            if (b1Level === b2Level && !(b1 as Block).willMerge && !(b2 as Block).willMerge) {
+                (b1 as Block).glow();
+                (b2 as Block).glow()
+                this.time.addEvent({
+                    delay: 500,
+                    callback: () => {
+                        (b1 as Block).upgradeLevel();
+                        b2.destroy();
 
-                this.score += (b1 as Block).level;
+                        this.score += (b1 as Block).level;
+
+                        this.highestLevel = Math.max((b1 as Block).level, this.highestLevel);
+                    }
+                })
             }
-
-            this.highestLevel = (b1 as Block).level;
         });
 
         this.input.on("pointerup", (pointer) => {
@@ -106,10 +113,21 @@ export default class FreeplayScene extends Phaser.Scene {
                     b1.y === b2.y &&
                     b1.level === b2.level
                 ) {
-                    (b1 as Block).upgradeLevel();
-                    b2.destroy();
-                    this.highestLevel = (b1 as Block).level;
-                    this.score += (b1 as Block).level;
+                    if (!b1.willMerge && !b2.willMerge) {
+                        b1.glow();
+                        b2.glow()
+                        this.time.addEvent({
+                            delay: 500,
+                            callback: () => {
+                                b1.upgradeLevel();
+                                b2.destroy();
+        
+                                this.score += b1.level;
+        
+                                this.highestLevel = Math.max(b1.level, this.highestLevel);
+                            }
+                        })
+                    }
                 }
             }
 

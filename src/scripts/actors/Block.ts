@@ -7,6 +7,7 @@ export default class Block extends Phaser.GameObjects.Container {
      * For example, if level is 3, value would be 2^3 = 8.
      */
     public level: number;
+    public willMerge = false;
 
     private rectangle: Phaser.GameObjects.Rectangle;
     private text: Phaser.GameObjects.Text;
@@ -45,6 +46,12 @@ export default class Block extends Phaser.GameObjects.Container {
         this.text.text = `${2 ** this.level}`;
 
         this.rectangle.fillColor = Block.blockToColor(this.level);
+        this.willMerge = false;
+    }
+
+    public glow() {
+        this.rectangle.fillColor = Phaser.Display.Color.IntegerToColor(this.rectangle.fillColor).brighten(15).color;
+        this.willMerge = true;
     }
 
     public static blockToColor(level: number) {
