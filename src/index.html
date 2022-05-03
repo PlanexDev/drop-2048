@@ -28,6 +28,11 @@
 
     <title><%= htmlWebpackPlugin.options.gameName %></title>
     <style>
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("assets/fonts/JetBrainsMono.ttf");
+      }
+
       html,
       body {
         height: 100%;
@@ -40,14 +45,18 @@
 
     <!-- installs the serviceWorker -->
     <!-- <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./sw.js')
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("./sw.js")
         })
       }
     </script> -->
   </head>
   <body>
+    <!-- Load font -->
+    <div style="font-family: 'JetBrains Mono'; position:absolute; left:-1000px; visibility:hidden;">.</div>
+    <div style="font-family: 'JetBrains Mono'; font-weight: 900; position:absolute; left:-1000px; visibility:hidden;">.</div>
+
     <div id="phaser-game"></div>
   </body>
 </html>

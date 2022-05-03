@@ -1,1 +1,4 @@
-"@yandeu/prettier-config"
+{
+    "singleQuote": false,
+    "tabWidth": 4
+}
