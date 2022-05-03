@@ -45,7 +45,7 @@ export default class FreeplayScene extends Phaser.Scene {
                         (b1 as Block).upgradeLevel();
                         b2.destroy();
 
-                        this.score += (b1 as Block).level;
+                        this.score += 2**(b1 as Block).level;
 
                         this.highestLevel = Math.max((b1 as Block).level, this.highestLevel);
                     }
@@ -122,7 +122,7 @@ export default class FreeplayScene extends Phaser.Scene {
                                 b1.upgradeLevel();
                                 b2.destroy();
         
-                                this.score += b1.level;
+                                this.score += 2**b1.level;
         
                                 this.highestLevel = Math.max(b1.level, this.highestLevel);
                             }
