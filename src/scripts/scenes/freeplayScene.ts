@@ -1,10 +1,9 @@
 import Block from "../actors/Block";
 
 export default class FreeplayScene extends Phaser.Scene {
-    private graphics: Phaser.GameObjects.Graphics;
     private blocks: Phaser.GameObjects.Group;
     private currentBlock: Block | null;
-    private highestLevel = 1;
+    private highestValue = 1;
     private currentBlockShadow: Phaser.GameObjects.Rectangle;
     private score = 0;
 
@@ -13,14 +12,9 @@ export default class FreeplayScene extends Phaser.Scene {
     }
 
     create() {
-        this.physics.world.setFPS(1000);
+        this.initPhysics();
 
-        this.physics.world.setBounds(350, 70, 900, 1080);
-
-        this.graphics = this.add.graphics();
-
-        this.graphics.lineStyle(5, 0xff00ff, 1.0);
-        this.graphics.lineBetween(350, 430, 1250, 430);
+        this.initGraphics()
 
         this.currentBlockShadow = this.add
             .rectangle(350, 250, 180, 980, 0x000000, 0.3)
@@ -28,37 +22,11 @@ export default class FreeplayScene extends Phaser.Scene {
 
         this.blocks = this.add.group();
 
+        this.physics.add.collider(this.blocks, this.blocks)
+
         this.currentBlock = this.add.existing(
-            new Block(this, this.highestLevel, 0)
+            new Block(this, this.highestValue, 0)
         );
-
-        this.physics.add.collider(this.blocks, this.blocks, (b1, b2) => {
-            const b1Level = (b1 as Block).level;
-            const b2Level = (b2 as Block).level;
-
-            if (
-                b1Level === b2Level &&
-                !(b1 as Block).willMerge &&
-                !(b2 as Block).willMerge
-            ) {
-                (b1 as Block).glow(this.time);
-                (b2 as Block).glow(this.time);
-                this.time.addEvent({
-                    delay: 500,
-                    callback: () => {
-                        (b1 as Block).upgradeLevel();
-                        b2.destroy();
-
-                        this.score += (b1 as Block).level;
-
-                        this.highestLevel = Math.max(
-                            (b1 as Block).level,
-                            this.highestLevel
-                        );
-                    },
-                });
-            }
-        });
 
         this.input.on("pointerup", (pointer) => {
             const { x, y } = pointer;
@@ -85,7 +53,7 @@ export default class FreeplayScene extends Phaser.Scene {
                 delay: 250,
                 callback: () => {
                     this.currentBlock = this.add.existing(
-                        new Block(this, this.highestLevel, xIndex)
+                        new Block(this, this.highestValue, xIndex)
                     );
 
                     this.currentBlockShadow.x = this.currentBlock.x;
@@ -114,31 +82,13 @@ export default class FreeplayScene extends Phaser.Scene {
     update() {
         for (const b1 of this.blocks.getChildren() as Block[]) {
             for (const b2 of this.blocks.getChildren() as Block[]) {
-                if (
-                    b1 !== b2 &&
-                    Math.abs(b1.x + 180 - b2.x) < 5 &&
-                    Math.abs(b1.y - b2.y) < 5 &&
-                    b1.level === b2.level
-                ) {
-                    if (!b1.willMerge && !b2.willMerge) {
-                        b1.glow(this.time);
-                        b2.glow(this.time);
-                        this.time.addEvent({
-                            delay: 500,
-                            callback: () => {
-                                b1.upgradeLevel();
-                                b2.destroy();
-
-                                this.score += 2 ** b1.level;
-
-                                this.highestLevel = Math.max(
-                                    b1.level,
-                                    this.highestLevel
-                                );
-                            },
-                        });
-                    }
+                if (b1.canMergeWith(b2)) {
+                    b1.mergeWith(b2, this.time, this.incrementScore.bind(this));
                 }
+            }
+
+            if (b1.value > this.highestValue) {
+                this.highestValue = b1.value
             }
 
             if (b1.y <= 250 && b1.body.velocity.y < 50) {
@@ -146,5 +96,22 @@ export default class FreeplayScene extends Phaser.Scene {
                 this.scene.launch("Death", { score: this.score });
             }
         }
+    }
+
+    private incrementScore(score: number) {
+        this.score += score;
+    }
+
+    private initPhysics() {
+        this.physics.world.setFPS(1000);
+
+        this.physics.world.setBounds(350, 70, 900, 1080);
+    }
+
+    private initGraphics() {
+        const graphics = this.add.graphics();
+
+        graphics.lineStyle(5, 0xff00ff, 1.0);
+        graphics.lineBetween(350, 430, 1250, 430);
     }
 }
