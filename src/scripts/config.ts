@@ -15,5 +15,9 @@ export const config = {
             fontSize: "164px",
             fontWeight: "900",
         },
+        titleBlock: {
+            fontFamily: "Tsuki",
+            fontSize: "148px",
+        },
     },
 };

@@ -6,7 +6,7 @@ export default class PreloadScene extends Phaser.Scene {
     preload() {}
 
     create() {
-        this.scene.start("Freeplay");
+        this.scene.start("Title");
 
         /**
          * This is how you would dynamically import the FreeplayScene class (with code splitting),

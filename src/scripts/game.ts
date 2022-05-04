@@ -2,6 +2,7 @@ import "phaser";
 import DeathScene from "./scenes/deathScene";
 import FreeplayScene from "./scenes/freeplayScene";
 import PreloadScene from "./scenes/preloadScene";
+import TitleScene from "./scenes/titleScene";
 
 const DEFAULT_WIDTH = 1600;
 const DEFAULT_HEIGHT = 1200;
@@ -16,11 +17,11 @@ const config = {
         width: DEFAULT_WIDTH,
         height: DEFAULT_HEIGHT,
     },
-    scene: [PreloadScene, FreeplayScene, DeathScene],
+    scene: [PreloadScene, FreeplayScene, DeathScene, TitleScene],
     physics: {
         default: "arcade",
         arcade: {
-            debug: true,
+            debug: false,
             gravity: { y: 5000 },
         },
     },
