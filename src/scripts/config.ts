@@ -14,7 +14,7 @@ export const config = {
             fontFamily: "Tsuki",
             fontSize: "294px",
             fontWeight: "900",
-            color: "#cc6624",
+            color: "orange",
         },
         titleBlock: {
             fontFamily: "Tsuki",
