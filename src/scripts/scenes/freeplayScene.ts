@@ -110,7 +110,7 @@ export default class FreeplayScene extends Phaser.Scene {
                 if (
                     b1 !== b2 &&
                     Math.abs(b1.x + 180 - b2.x) < 5 &&
-                    b1.y === b2.y &&
+                    Math.abs(b1.y - b2.y) < 5 &&
                     b1.level === b2.level
                 ) {
                     if (!b1.willMerge && !b2.willMerge) {
