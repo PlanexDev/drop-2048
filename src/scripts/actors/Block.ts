@@ -18,7 +18,7 @@ export default class Block extends Phaser.GameObjects.Container {
                 ? xIndex * 180 + 350
                 : 350 + Phaser.Math.Between(0, 4) * 180;
 
-        super(scene, xPos, 0);
+        super(scene, xPos, 250);
 
         this.level = Phaser.Math.Between(1, highestLevel);
 

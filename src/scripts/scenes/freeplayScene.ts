@@ -20,10 +20,10 @@ export default class FreeplayScene extends Phaser.Scene {
         this.graphics = this.add.graphics();
 
         this.graphics.lineStyle(5, 0xff00ff, 1.0);
-        this.graphics.lineBetween(350, 230, 1250, 230);
+        this.graphics.lineBetween(350, 430, 1250, 430);
 
         this.currentBlockShadow = this.add
-            .rectangle(350, 70, 180, 1130, 0x000000, 0.3)
+            .rectangle(350, 250, 180, 980, 0x000000, 0.3)
             .setOrigin(0);
 
         this.blocks = this.add.group();
@@ -45,7 +45,7 @@ export default class FreeplayScene extends Phaser.Scene {
                         (b1 as Block).upgradeLevel();
                         b2.destroy();
 
-                        this.score += 2**(b1 as Block).level;
+                        this.score += (b1 as Block).level;
 
                         this.highestLevel = Math.max((b1 as Block).level, this.highestLevel);
                     }
@@ -131,7 +131,7 @@ export default class FreeplayScene extends Phaser.Scene {
                 }
             }
 
-            if (b1.y <= 250 && b1.body.velocity.y < 50) {
+            if (b1.y <= 250 && b1.body.velocity.y < 100) {
                 this.scene.pause();
                 this.scene.launch("Death", { score: this.score });
             }
