@@ -21,7 +21,7 @@ export default class DeathScene extends Phaser.Scene {
                 this.cameras.main.width,
                 this.cameras.main.height,
                 0x000000,
-                0.4
+                0.75
             )
             .setOrigin(0);
 
