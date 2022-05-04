@@ -91,7 +91,7 @@ export default class FreeplayScene extends Phaser.Scene {
                 this.highestValue = b1.value
             }
 
-            if (b1.y <= 250 && b1.body.velocity.y < 50) {
+            if (b1.y <= 250 && b1.body.velocity.y < 25) {
                 this.scene.pause();
                 this.scene.launch("Death", { score: this.score });
             }
