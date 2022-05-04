@@ -109,7 +109,7 @@ export default class FreeplayScene extends Phaser.Scene {
             for (const b2 of this.blocks.getChildren() as Block[]) {
                 if (
                     b1 !== b2 &&
-                    b1.x + 180 === b2.x &&
+                    Math.abs(b1.x + 180 - b2.x) < 5 &&
                     b1.y === b2.y &&
                     b1.level === b2.level
                 ) {
@@ -131,7 +131,7 @@ export default class FreeplayScene extends Phaser.Scene {
                 }
             }
 
-            if (b1.y <= 250 && b1.body.velocity.y < 100) {
+            if (b1.y <= 250 && b1.body.velocity.y < 50) {
                 this.scene.pause();
                 this.scene.launch("Death", { score: this.score });
             }
