@@ -17,7 +17,7 @@ export const blockColors = {
     8192: 0x7c12db,
     16284: 0xa45acb,
     32768: 0x023514,
-}
+};
 
 export default class Block extends Phaser.GameObjects.Container {
     body: Phaser.Physics.Arcade.Body;
@@ -60,22 +60,26 @@ export default class Block extends Phaser.GameObjects.Container {
     }
 
     public canMergeWith(other: Block) {
-        const sameValue = other.value === this.value
-        const willMerge = this.willMerge || other.willMerge
+        const sameValue = other.value === this.value;
+        const willMerge = this.willMerge || other.willMerge;
 
-        const nextToOther = Math.abs(this.x + 180 - other.x) < 5
-        const sameY = Math.abs(this.y - other.y) < 5
-        const nextTo = nextToOther && sameY
+        const nextToOther = Math.abs(this.x + 180 - other.x) < 5;
+        const sameY = Math.abs(this.y - other.y) < 5;
+        const nextTo = nextToOther && sameY;
 
-        const aboveOther = Math.abs(this.y + 180 - other.y) < 5
-        const sameX = Math.abs(this.x - other.x) < 5
+        const aboveOther = Math.abs(this.y + 180 - other.y) < 5;
+        const sameX = Math.abs(this.x - other.x) < 5;
         const above = aboveOther && sameX;
-        
+
         return sameValue && !willMerge && (nextTo || above);
     }
 
-    public mergeWith(other: Block, clock: Phaser.Time.Clock, incrementScore: (number) => void) {
-        this.glow(clock)
+    public mergeWith(
+        other: Block,
+        clock: Phaser.Time.Clock,
+        incrementScore: (number) => void
+    ) {
+        this.glow(clock);
         other.glow(clock);
 
         clock.addEvent({
@@ -85,7 +89,7 @@ export default class Block extends Phaser.GameObjects.Container {
 
                 other.destroy();
 
-                incrementScore(this.value)
+                incrementScore(this.value);
             },
         });
     }
@@ -117,7 +121,6 @@ export default class Block extends Phaser.GameObjects.Container {
     }
 
     public static blockToColor(value: number) {
-        return (blockColors[value] ?? 0x000000
-        );
+        return blockColors[value] ?? 0x000000;
     }
 }

@@ -14,7 +14,7 @@ export const config = {
             fontFamily: "Tsuki",
             fontSize: "294px",
             fontWeight: "900",
-            color: "#cc6624"
+            color: "#cc6624",
         },
         titleBlock: {
             fontFamily: "Tsuki",
@@ -23,7 +23,7 @@ export const config = {
         scoreboard: {
             fontFamily: "Tsuki",
             fontSize: "244px",
-            color: "grey"
-        }
+            color: "grey",
+        },
     },
 };

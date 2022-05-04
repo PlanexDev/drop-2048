@@ -16,7 +16,7 @@ export default class FreeplayScene extends Phaser.Scene {
     create() {
         this.initPhysics();
 
-        this.initGraphics()
+        this.initGraphics();
 
         this.currentBlockShadow = this.add
             .rectangle(350, 250, 180, 980, 0x000000, 0.3)
@@ -24,9 +24,14 @@ export default class FreeplayScene extends Phaser.Scene {
 
         this.blocks = this.add.group();
 
-        this.scoreboard = this.add.text(800, 50, "0", config.textStyles.scoreboard);
+        this.scoreboard = this.add.text(
+            800,
+            50,
+            "0",
+            config.textStyles.scoreboard
+        );
 
-        this.physics.add.collider(this.blocks, this.blocks)
+        this.physics.add.collider(this.blocks, this.blocks);
 
         this.currentBlock = this.add.existing(
             new Block(this, this.highestValue, 0)
@@ -92,7 +97,7 @@ export default class FreeplayScene extends Phaser.Scene {
             }
 
             if (b1.value > this.highestValue) {
-                this.highestValue = b1.value
+                this.highestValue = b1.value;
             }
 
             if (b1.y <= 250 && b1.body.velocity.y < 25) {
@@ -105,7 +110,7 @@ export default class FreeplayScene extends Phaser.Scene {
     private incrementScore(score: number) {
         this.score += score;
 
-        this.scoreboard.text = `${this.score}`
+        this.scoreboard.text = `${this.score}`;
     }
 
     private initPhysics() {
