@@ -1,4 +1,5 @@
 import Block from "../actors/Block";
+import { config } from "../config";
 
 export default class FreeplayScene extends Phaser.Scene {
     private blocks: Phaser.GameObjects.Group;
@@ -6,6 +7,7 @@ export default class FreeplayScene extends Phaser.Scene {
     private highestValue = 1;
     private currentBlockShadow: Phaser.GameObjects.Rectangle;
     private score = 0;
+    private scoreboard: Phaser.GameObjects.Text;
 
     constructor() {
         super({ key: "Freeplay" });
@@ -21,6 +23,8 @@ export default class FreeplayScene extends Phaser.Scene {
             .setOrigin(0);
 
         this.blocks = this.add.group();
+
+        this.scoreboard = this.add.text(800, 50, "0", config.textStyles.scoreboard);
 
         this.physics.add.collider(this.blocks, this.blocks)
 
@@ -100,6 +104,8 @@ export default class FreeplayScene extends Phaser.Scene {
 
     private incrementScore(score: number) {
         this.score += score;
+
+        this.scoreboard.text = `${this.score}`
     }
 
     private initPhysics() {

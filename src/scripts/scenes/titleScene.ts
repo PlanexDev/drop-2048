@@ -24,7 +24,11 @@ export default class TitleScene extends Phaser.Scene {
 
         const layer1Text = "DROP"
         for (let i = 0; i < 4; i++) {
-            layer1.add(new LetterBlock(this, 400+200*i, -200, layer1Text[i], 0xcc0033), true)
+            const yPos = -100 - Phaser.Math.Between(0, 400)
+            const gravity = -100 - Phaser.Math.Between(0, 3200)
+            const block = new LetterBlock(this, 400+200*i, yPos, layer1Text[i])
+            block.body.setGravityY(gravity)
+            layer1.add(block, true)
         }
 
         this.physics.add.collider(layer1, layer1Platform)
@@ -35,7 +39,12 @@ export default class TitleScene extends Phaser.Scene {
 
         const layer2Text = "2048"
         for (let i = 0; i < 4; i++) {
-            layer2.add(new LetterBlock(this, 300+250*i, -1600, layer2Text[i], 0xcc0033), true)
+            const yPos = -500 - Phaser.Math.Between(0, 900)
+            const gravity = -1000 - Phaser.Math.Between(0, 3200)
+            const block = new LetterBlock(this, 400+200*i, yPos, layer2Text[i])
+            block.body.setGravityY(gravity)
+
+            layer2.add(block, true)
         }
 
         this.physics.add.collider(layer2, layer2Platform)

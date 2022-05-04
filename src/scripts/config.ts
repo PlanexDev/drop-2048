@@ -6,18 +6,24 @@ export const config = {
             fontWeight: "900",
         },
         gameoverText: {
-            fontFamily: "JetBrains Mono",
-            fontSize: "84px",
+            fontFamily: "Tsuki",
+            fontSize: "126px",
             fontWeight: "900",
         },
         gameoverScore: {
-            fontFamily: "JetBrains Mono",
-            fontSize: "164px",
+            fontFamily: "Tsuki",
+            fontSize: "294px",
             fontWeight: "900",
+            color: "#cc6624"
         },
         titleBlock: {
             fontFamily: "Tsuki",
             fontSize: "148px",
         },
+        scoreboard: {
+            fontFamily: "Tsuki",
+            fontSize: "244px",
+            color: "grey"
+        }
     },
 };

@@ -1,6 +1,24 @@
 import { config } from "../config";
 import FreeplayScene from "../scenes/freeplayScene";
 
+export const blockColors = {
+    2: 0xe72900,
+    4: 0xc56fe5,
+    8: 0x626997,
+    16: 0x0c9c19,
+    32: 0x8066ff,
+    64: 0x554466,
+    128: 0x3399ff,
+    256: 0x1aab7a,
+    512: 0x468499,
+    1024: 0x0e2f44,
+    2048: 0x794044,
+    4096: 0x523944,
+    8192: 0x7c12db,
+    16284: 0xa45acb,
+    32768: 0x023514,
+}
+
 export default class Block extends Phaser.GameObjects.Container {
     body: Phaser.Physics.Arcade.Body;
     /**
@@ -99,24 +117,7 @@ export default class Block extends Phaser.GameObjects.Container {
     }
 
     public static blockToColor(value: number) {
-        return (
-            {
-                2: 0xe72900,
-                4: 0xc56fe5,
-                8: 0x626997,
-                16: 0x0c9c19,
-                32: 0x8066ff,
-                64: 0x554466,
-                128: 0x3399ff,
-                256: 0x1aab7a,
-                512: 0x468499,
-                1024: 0x0e2f44,
-                2048: 0x794044,
-                4096: 0x523944,
-                8192: 0x7c12db,
-                16284: 0xa45acb,
-                32768: 0x023514,
-            }[value] ?? 0x000000
+        return (blockColors[value] ?? 0x000000
         );
     }
 }
