@@ -24,12 +24,9 @@ export default class FreeplayScene extends Phaser.Scene {
 
         this.blocks = this.add.group();
 
-        this.scoreboard = this.add.text(
-            800,
-            50,
-            "0",
-            config.textStyles.scoreboard
-        );
+        this.scoreboard = this.add
+            .text(800, 50, "0", config.textStyles.scoreboard)
+            .setOrigin(0.5);
 
         this.physics.add.collider(this.blocks, this.blocks);
 

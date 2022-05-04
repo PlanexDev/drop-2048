@@ -61,7 +61,8 @@ export default class Block extends Phaser.GameObjects.Container {
 
     public canMergeWith(other: Block) {
         const sameValue = other.value === this.value;
-        const blocksAreStationary = this.body.velocity.y < 25 && other.body.velocity.y < 25
+        const blocksAreStationary =
+            this.body.velocity.y < 25 && other.body.velocity.y < 25;
         const willMerge = this.willMerge || other.willMerge;
 
         const nextToOther = Math.abs(this.x + 180 - other.x) < 5;
@@ -72,7 +73,9 @@ export default class Block extends Phaser.GameObjects.Container {
         const sameX = Math.abs(this.x - other.x) < 5;
         const above = aboveOther && sameX;
 
-        return sameValue && blocksAreStationary && !willMerge && (nextTo || above);
+        return (
+            sameValue && blocksAreStationary && !willMerge && (nextTo || above)
+        );
     }
 
     public mergeWith(
