@@ -54,9 +54,11 @@ export default class Block extends Phaser.GameObjects.Container {
             repeat: 30,
             delay: 10,
             callback: () => {
-                this.rectangle.fillColor = Phaser.Display.Color.IntegerToColor(this.rectangle.fillColor).brighten(1).color;
-            }
-        })
+                this.rectangle.fillColor = Phaser.Display.Color.IntegerToColor(
+                    this.rectangle.fillColor
+                ).brighten(1).color;
+            },
+        });
         this.willMerge = true;
     }
 
@@ -78,6 +80,20 @@ export default class Block extends Phaser.GameObjects.Container {
                 return 0x3399ff;
             case 8:
                 return 0x1aab7a;
+            case 9:
+                return 0x468499;
+            case 10:
+                return 0x0e2f44;
+            case 11:
+                return 0x794044;
+            case 12:
+                return 0x523944;
+            case 13:
+                return 0x7c12db;
+            case 14:
+                return 0xa45acb;
+            case 15:
+                return 0x023514;
             default:
                 return 0x000000;
         }

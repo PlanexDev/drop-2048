@@ -36,9 +36,13 @@ export default class FreeplayScene extends Phaser.Scene {
             const b1Level = (b1 as Block).level;
             const b2Level = (b2 as Block).level;
 
-            if (b1Level === b2Level && !(b1 as Block).willMerge && !(b2 as Block).willMerge) {
+            if (
+                b1Level === b2Level &&
+                !(b1 as Block).willMerge &&
+                !(b2 as Block).willMerge
+            ) {
                 (b1 as Block).glow(this.time);
-                (b2 as Block).glow(this.time)
+                (b2 as Block).glow(this.time);
                 this.time.addEvent({
                     delay: 500,
                     callback: () => {
@@ -47,9 +51,12 @@ export default class FreeplayScene extends Phaser.Scene {
 
                         this.score += (b1 as Block).level;
 
-                        this.highestLevel = Math.max((b1 as Block).level, this.highestLevel);
-                    }
-                })
+                        this.highestLevel = Math.max(
+                            (b1 as Block).level,
+                            this.highestLevel
+                        );
+                    },
+                });
             }
         });
 
@@ -115,18 +122,21 @@ export default class FreeplayScene extends Phaser.Scene {
                 ) {
                     if (!b1.willMerge && !b2.willMerge) {
                         b1.glow(this.time);
-                        b2.glow(this.time)
+                        b2.glow(this.time);
                         this.time.addEvent({
                             delay: 500,
                             callback: () => {
                                 b1.upgradeLevel();
                                 b2.destroy();
-        
-                                this.score += 2**b1.level;
-        
-                                this.highestLevel = Math.max(b1.level, this.highestLevel);
-                            }
-                        })
+
+                                this.score += 2 ** b1.level;
+
+                                this.highestLevel = Math.max(
+                                    b1.level,
+                                    this.highestLevel
+                                );
+                            },
+                        });
                     }
                 }
             }
