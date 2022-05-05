@@ -86,6 +86,7 @@ export default class FreeplayScene extends Phaser.Scene {
     }
 
     update() {
+        let blocksAreTouching = false;
         for (const b1 of this.blocks.getChildren() as Block[]) {
             for (const b2 of this.blocks.getChildren() as Block[]) {
                 if (b1.canMergeWith(b2)) {
@@ -98,9 +99,13 @@ export default class FreeplayScene extends Phaser.Scene {
             }
 
             if (b1.y <= 250 && b1.body.velocity.y < 25) {
-                this.scene.pause();
-                this.scene.launch("Death", { score: this.score });
+                blocksAreTouching = true;
             }
+        }
+
+        if (blocksAreTouching && (this.blocks.getChildren() as Block[]).every((item) => !item.willMerge)) {
+            this.scene.pause();
+            this.scene.launch("Death", { score: this.score });
         }
     }
 
