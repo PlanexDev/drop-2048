@@ -124,7 +124,7 @@ export default class Block extends Phaser.GameObjects.Container {
     private glow(clock: Phaser.Time.Clock) {
         clock.addEvent({
             repeat: 25,
-            delay: 10,
+            delay: 5,
             callback: () => {
                 this.rectangle.fillColor = Phaser.Display.Color.IntegerToColor(
                     this.rectangle.fillColor
