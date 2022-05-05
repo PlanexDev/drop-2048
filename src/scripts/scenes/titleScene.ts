@@ -69,7 +69,7 @@ export default class TitleScene extends Phaser.Scene {
             .setPadding(50)
             .setBackgroundColor("#cc6624");
 
-        button.setInteractive().on("pointerdown", () => {
+        button.setInteractive().on("pointerup", () => {
             this.scene.stop();
             this.scene.launch("Freeplay");
         });
