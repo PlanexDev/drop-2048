@@ -28,6 +28,8 @@ export default class Block extends Phaser.GameObjects.Container {
     private _value: number;
     public willMerge = false;
 
+    private static blockWeights = [0, 75, 20, 10, 7.5, 5, 2.5, 1, 0.5, 0.25, 0.1]
+
     private rectangle: Phaser.GameObjects.Rectangle;
     private text: Phaser.GameObjects.Text;
 
@@ -39,7 +41,19 @@ export default class Block extends Phaser.GameObjects.Container {
 
         super(scene, xPos, 250);
 
-        this._value = Phaser.Math.Between(1, Math.log2(highestValue));
+        const totalWeight = Block.blockWeights.slice(0, Math.log2(highestValue)).reduce((a, b) => a+b);
+        const number = Phaser.Math.Between(1, totalWeight)
+        let currentTotal = 0;
+        let i: number;
+
+        for (i = 1; i < Block.blockWeights.length; i++) {
+            currentTotal += Block.blockWeights[i]
+            if (currentTotal > number) {
+                break;
+            }
+        }
+
+        this._value = i;
 
         this.rectangle = scene.add
             .rectangle(0, 0, 180, 180, Block.blockToColor(this.value))

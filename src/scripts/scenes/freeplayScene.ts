@@ -4,7 +4,7 @@ import { config } from "../config";
 export default class FreeplayScene extends Phaser.Scene {
     private blocks: Phaser.GameObjects.Group;
     private currentBlock: Block | null;
-    private highestValue = 1;
+    private highestValue = 2;
     private currentBlockShadow: Phaser.GameObjects.Rectangle;
     private score = 0;
     private scoreboard: Phaser.GameObjects.Text;
