@@ -56,7 +56,7 @@ export default class FreeplayScene extends Phaser.Scene {
             this.currentBlock = null;
 
             this.time.addEvent({
-                delay: 250,
+                delay: 300,
                 callback: () => {
                     this.currentBlock = this.add.existing(
                         new Block(this, this.highestValue, xIndex)
