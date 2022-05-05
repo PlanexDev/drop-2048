@@ -20,7 +20,7 @@ export default class TitleScene extends Phaser.Scene {
         // })
         const layer1 = this.add.group();
         const layer1Platform = this.add
-            .rectangle(0, 300, 1600, 5, 0xffffff)
+            .rectangle(0, 300, 1600, 5, 0xffffff, 0)
             .setOrigin(0);
         this.physics.add.existing(layer1Platform, true);
 
@@ -42,7 +42,7 @@ export default class TitleScene extends Phaser.Scene {
 
         const layer2 = this.add.group();
         const layer2Platform = this.add
-            .rectangle(0, 600, 1600, 5, 0xffffff)
+            .rectangle(0, 600, 1600, 5, 0xffffff, 0)
             .setOrigin(0);
         this.physics.add.existing(layer2Platform, true);
 
@@ -52,7 +52,7 @@ export default class TitleScene extends Phaser.Scene {
             const gravity = -1000 - Phaser.Math.Between(0, 3200);
             const block = new LetterBlock(
                 this,
-                400 + 200 * i,
+                300 + 250 * i,
                 yPos,
                 layer2Text[i]
             );
