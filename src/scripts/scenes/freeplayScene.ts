@@ -6,7 +6,7 @@ export default class FreeplayScene extends Phaser.Scene {
     private currentBlock: Block | null;
     private highestValue = 2;
     private currentBlockShadow: Phaser.GameObjects.Rectangle;
-    private score = 1000000;
+    private score = 0;
     private scoreboard: Phaser.GameObjects.Text;
 
     constructor() {
